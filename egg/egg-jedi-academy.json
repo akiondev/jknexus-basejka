@@ -35,8 +35,7 @@
       "default_value": "",
       "user_viewable": true,
       "user_editable": true,
-      "rules": "nullable|url|max:512",
-      "field_type": "text"
+      "rules": "nullable|string|max:512"
     }
   ]
 }
