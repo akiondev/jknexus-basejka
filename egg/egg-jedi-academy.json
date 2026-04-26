@@ -6,7 +6,7 @@
   },
   "exported_at": "2026-04-26T18:00:00+00:00",
   "name": "Star Wars Jedi Academy",
-  "author": "akiondev",
+  "author": "akiondev@example.com",
   "description": "Star Wars Jedi Academy dedicated server (linuxjampded) running on a 32-bit Debian (i386) Docker image.\r\n\r\nFeatures:\r\n- Runs the original 32-bit linuxjampded binary inside a Debian i386 container.\r\n- Automatically downloads the dedicated server binaries from the jknexus-basejka repository.\r\n- Accepts a single URL pointing to an archive containing the base game assets (*.pk3 files).\r\n- Supports ZIP, tar.gz, tar.bz2, tar.xz, plain tar, 7z and RAR archives \u2014 extracted automatically into the base/ folder.\r\n\r\nRequirements:\r\n- You must own a legal copy of Star Wars Jedi Academy.\r\n- Provide the URL to an archive of your base assets (assets0.pk3, assets1.pk3, assets2.pk3) in the ASSETS_URL variable.",
   "features": null,
   "docker_images": {
