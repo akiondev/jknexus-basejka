@@ -26,7 +26,7 @@ copy_if_missing() {
     fi
 
     if [ ! -f "$source_file" ]; then
-        echo "Missing required seed file at $source_file. Verify the Docker image was built with the jalinuxded_1.011 files copied into /opt/jka-server." >&2
+        echo "Missing required seed file at $source_file. Verify the Docker image contains the required server files in /opt/jka-server." >&2
         exit 1
     fi
 
