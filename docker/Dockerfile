@@ -38,6 +38,14 @@ RUN         apt-get update \
             && rm -rf /var/lib/apt/lists/* \
             && useradd -m -d /home/container -s /bin/bash container
 
+# Install the dedicated server files outside /home/container. Pterodactyl mounts
+# the server volume over /home/container, so entrypoint.sh copies these files
+# into the mounted volume on first startup if they are missing.
+COPY        --chown=container:container jalinuxded_1.011/linuxjampded /opt/jka-server/linuxjampded
+COPY        --chown=container:container jalinuxded_1.011/jampgamei386.so /opt/jka-server/base/jampgamei386.so
+COPY        --chown=container:container jalinuxded_1.011/server.cfg /opt/jka-server/base/server.cfg
+RUN         chmod +x /opt/jka-server/linuxjampded
+
 # Install libcxa.so.1 into the system library path (as root) and refresh
 # the dynamic linker cache so linuxjampded can find it at runtime.
 COPY        jalinuxded_1.011/libcxa.so.1 /usr/lib/libcxa.so.1
