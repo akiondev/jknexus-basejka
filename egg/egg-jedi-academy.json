@@ -7,7 +7,7 @@
   "exported_at": "2026-04-26T18:00:00+00:00",
   "name": "Star Wars Jedi Academy",
   "author": "akiondev@example.com",
-  "description": "Star Wars Jedi Academy dedicated server (linuxjampded) running on a 32-bit Debian (i386) Docker image.\r\n\r\nFeatures:\r\n- Runs the original 32-bit linuxjampded binary inside a Debian i386 container.\r\n- The Docker image includes the dedicated server binaries and seeds missing files into the Pterodactyl server volume during installation and startup.\r\n\r\nRequirements:\r\n- You must own a legal copy of Star Wars Jedi Academy.\r\n- Manually place the base game assets (assets0.pk3, assets1.pk3, assets2.pk3) in the base/ folder.",
+  "description": "Star Wars Jedi Academy dedicated server (linuxjampded) running on a 32-bit Debian (i386) Docker image.\r\n\r\nFeatures:\r\n- Runs the original 32-bit linuxjampded binary inside a Debian i386 container.\r\n- The Docker image includes the dedicated server binaries; the egg installation script seeds missing files during install/reinstall, and entrypoint.sh checks and seeds missing files again on every container startup.\r\n\r\nRequirements:\r\n- You must own a legal copy of Star Wars Jedi Academy.\r\n- Manually place the base game assets (assets0.pk3, assets1.pk3, assets2.pk3) in the base/ folder.",
   "features": null,
   "docker_images": {
     "JKA Dedicated Server (Debian i386)": "ghcr.io/akiondev/jknexus-basejka:latest"

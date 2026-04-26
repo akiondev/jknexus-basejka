@@ -26,11 +26,14 @@ copy_if_missing() {
     fi
 
     if [ ! -f "$source_file" ]; then
-        echo "Missing required seed file: $source_file" >&2
+        echo "Missing required seed file at $source_file. Verify the Docker image was built with the jalinuxded_1.011 files copied into /opt/jka-server." >&2
         exit 1
     fi
 
-    cp "$source_file" "$destination_file"
+    if ! cp "$source_file" "$destination_file"; then
+        echo "Failed to copy $source_file to $destination_file. Verify /home/container is writable and has enough free space." >&2
+        exit 1
+    fi
 }
 
 mkdir -p /home/container/base
