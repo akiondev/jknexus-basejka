@@ -1,8 +1,8 @@
 # Star Wars Jedi Academy Dedicated Server — Pterodactyl Runtime Image
 # 32-bit Debian (i386) for running the linuxjampded ELF 32-bit binary.
 #
-# Build:
-#   docker build --platform linux/386 -t ghcr.io/akiondev/jknexus-basejka:latest .
+# Build (run from repo root):
+#   docker build --platform linux/386 -f docker/Dockerfile -t ghcr.io/akiondev/jknexus-basejka:latest .
 # Push:
 #   docker push ghcr.io/akiondev/jknexus-basejka:latest
 
@@ -37,6 +37,11 @@ RUN         apt-get update \
                 tzdata \
             && rm -rf /var/lib/apt/lists/* \
             && useradd -m -d /home/container -s /bin/bash container
+
+# Install libcxa.so.1 into the system library path (as root) and refresh
+# the dynamic linker cache so linuxjampded can find it at runtime.
+COPY        jalinuxded_1.011/libcxa.so.1 /usr/lib/libcxa.so.1
+RUN         ldconfig
 
 USER        container
 ENV         USER=container HOME=/home/container

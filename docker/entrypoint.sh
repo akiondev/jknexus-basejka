@@ -1,8 +1,6 @@
 #!/bin/bash
 #
 # Pterodactyl entrypoint for the JKA dedicated server.
-# Adds the server working directory to LD_LIBRARY_PATH so that libcxa.so.1
-# (placed there by the install script) can be found by linuxjampded at runtime.
 #
 
 # Default the TZ environment variable to UTC.
@@ -12,10 +10,6 @@ export TZ
 # Set environment variable that holds the Internal Docker IP
 INTERNAL_IP=$(ip route get 1 | awk '{print $(NF-2);exit}')
 export INTERNAL_IP
-
-# Make sure libcxa.so.1 (bundled in the container working directory by the
-# install script) is visible to the dynamic linker.
-export LD_LIBRARY_PATH=/home/container${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 # Switch to the container's working directory
 cd /home/container || exit 1
