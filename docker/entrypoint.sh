@@ -17,30 +17,27 @@ cd /home/container || exit 1
 
 # Seed the Pterodactyl server volume from the image when the required files are
 # missing. Existing user files are preserved, including custom server.cfg.
-for seed_file in \
-    /opt/jka-server/linuxjampded \
-    /opt/jka-server/base/jampgamei386.so \
-    /opt/jka-server/base/server.cfg
-do
-    if [ ! -f "$seed_file" ]; then
-        echo "Missing required seed file: $seed_file" >&2
+copy_if_missing() {
+    local source_file="$1"
+    local destination_file="$2"
+
+    if [ -f "$destination_file" ]; then
+        return
+    fi
+
+    if [ ! -f "$source_file" ]; then
+        echo "Missing required seed file: $source_file" >&2
         exit 1
     fi
-done
+
+    cp "$source_file" "$destination_file"
+}
 
 mkdir -p /home/container/base
 
-if [ ! -f /home/container/linuxjampded ]; then
-    cp /opt/jka-server/linuxjampded /home/container/linuxjampded
-fi
-
-if [ ! -f /home/container/base/jampgamei386.so ]; then
-    cp /opt/jka-server/base/jampgamei386.so /home/container/base/jampgamei386.so
-fi
-
-if [ ! -f /home/container/base/server.cfg ]; then
-    cp /opt/jka-server/base/server.cfg /home/container/base/server.cfg
-fi
+copy_if_missing /opt/jka-server/linuxjampded /home/container/linuxjampded
+copy_if_missing /opt/jka-server/base/jampgamei386.so /home/container/base/jampgamei386.so
+copy_if_missing /opt/jka-server/base/server.cfg /home/container/base/server.cfg
 
 chmod +x /home/container/linuxjampded
 
