@@ -20,18 +20,19 @@ cd /home/container || exit 1
 copy_if_missing() {
     local source_file="$1"
     local destination_file="$2"
+    local copy_error
 
     if [ -f "$destination_file" ]; then
         return
     fi
 
     if [ ! -f "$source_file" ]; then
-        echo "Missing required seed file at $source_file. Verify the Docker image contains the required server files in /opt/jka-server." >&2
+        echo "Missing required seed file: $source_file. Verify the Docker image contains the required server files in /opt/jka-server." >&2
         exit 1
     fi
 
-    if ! cp "$source_file" "$destination_file"; then
-        echo "Failed to copy $source_file to $destination_file. Verify /home/container is writable and has enough free space." >&2
+    if ! copy_error=$(cp "$source_file" "$destination_file" 2>&1); then
+        echo "Failed to copy $source_file to $destination_file: $copy_error" >&2
         exit 1
     fi
 }
