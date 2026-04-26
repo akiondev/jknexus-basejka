@@ -2,6 +2,7 @@
 #
 # Pterodactyl entrypoint for the JKA dedicated server.
 #
+set -e
 
 # Default the TZ environment variable to UTC.
 TZ=${TZ:-UTC}
@@ -16,6 +17,17 @@ cd /home/container || exit 1
 
 # Seed the Pterodactyl server volume from the image when the required files are
 # missing. Existing user files are preserved, including custom server.cfg.
+for seed_file in \
+    /opt/jka-server/linuxjampded \
+    /opt/jka-server/base/jampgamei386.so \
+    /opt/jka-server/base/server.cfg
+do
+    if [ ! -f "$seed_file" ]; then
+        echo "Missing required seed file: $seed_file" >&2
+        exit 1
+    fi
+done
+
 mkdir -p /home/container/base
 
 if [ ! -f /home/container/linuxjampded ]; then
