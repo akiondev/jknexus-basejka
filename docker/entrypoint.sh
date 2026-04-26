@@ -42,7 +42,10 @@ copy_if_missing /opt/jka-server/linuxjampded /home/container/linuxjampded
 copy_if_missing /opt/jka-server/base/jampgamei386.so /home/container/base/jampgamei386.so
 copy_if_missing /opt/jka-server/base/server.cfg /home/container/base/server.cfg
 
-chmod +x /home/container/linuxjampded
+if ! chmod +x /home/container/linuxjampded; then
+    echo "Failed to make /home/container/linuxjampded executable. Verify the file exists and /home/container is writable." >&2
+    exit 1
+fi
 
 # Convert all of the "{{VARIABLE}}" parts of the startup command into the
 # expected shell variable format "${VARIABLE}" and evaluate the string so that
