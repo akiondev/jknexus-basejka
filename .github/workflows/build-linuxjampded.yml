@@ -29,18 +29,18 @@ jobs:
 
       - name: Patch Makefile for modern GCC
         run: |
-          cd jediacademy-master/codemp
+          cd jediacademy-master/codemp/unix
           # Remove Intel-specific compiler flags that do not exist in GCC:
           #   -Kc++   : Intel C++ mode flag
           #   -use_msasm : Intel MS-style inline assembly
           #   -unroll : Intel unroll pragma
           #   -I/opt/intel/compiler50/ia32/include : Intel include path
-          sed -i 's/-Kc++//g; s/-use_msasm//g; s/-unroll//g; s|-I/opt/intel/compiler50/ia32/include||g' unix/makefile
+          sed -i 's/-Kc++//g; s/-use_msasm//g; s/-unroll//g; s|-I/opt/intel/compiler50/ia32/include||g' makefile
 
       - name: Build release binaries
         run: |
-          cd jediacademy-master/codemp
-          make -f unix/makefile release CC="gcc -m32" CXX="g++ -m32" ARCH=i386
+          cd jediacademy-master/codemp/unix
+          make -f makefile release CC="gcc -m32" CXX="g++ -m32" ARCH=i386
 
       - name: Verify build outputs
         run: |
