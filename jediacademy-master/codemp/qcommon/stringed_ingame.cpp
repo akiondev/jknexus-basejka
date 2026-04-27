@@ -760,11 +760,11 @@ LPCSTR Leetify( LPCSTR psString )
 							'O','0','L','1','E','3','A','4','S','5','T','7','I','!','H','#'	// laziness because of strchr()
 						};
 
-		char *p;
 		for (int i=0; i<sizeof(cReplace); i+=2)
 		{
-			while ((p=strchr(str.c_str(),cReplace[i]))!=NULL)
-				*p = cReplace[i+1];
+			int pos;
+			while ((pos = str.find(cReplace[i])) != string::npos)
+				str[pos] = cReplace[i+1];
 		}
 	}
 
