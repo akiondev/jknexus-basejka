@@ -77,7 +77,7 @@ DLL_ONLY=false
   # bk001205: no mo'  -Dstricmp=strcasecmp, see q_shared.h
   #BASE_CFLAGS =  -pipe -fsigned-char -x c++ -D_JK2 -D_M_IX86  -I/home/drews/STLport-4.5.3/stlport -I/opt/intel/compiler50/ia32/include
   #BASE_CFLAGS =  -pipe -fsigned-char -Kc++ -D_JK2 -D_M_IX86  -I/opt/intel/compiler50/ia32/include 
-  BASE_CFLAGS =  -D_JK2 -D_M_IX86 -Kc++ -w -I/opt/intel/compiler50/ia32/include 
+  BASE_CFLAGS =  -D_JK2 -D_M_IX86 -w -std=gnu++98 -I/opt/intel/compiler50/ia32/include 
   # rcg010216: DLL_ONLY for PPC
   ifeq ($(strip $(DLL_ONLY)),true)
     BASE_CFLAGS += -DDLL_ONLY
