@@ -23,6 +23,10 @@ const	int		MAX_FILENAME_LENGTH = 1024;
 
 typedef	float	vector_t[3];
 
+// Forward declarations for template member functions
+extern void *ICARUS_Malloc(int iSize);
+extern void  ICARUS_Free(void *pMem);
+
 enum 
 {
 	POP_FRONT,
