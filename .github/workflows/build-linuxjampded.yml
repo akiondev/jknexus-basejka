@@ -1,11 +1,6 @@
 name: Build linuxjampded (32-bit)
 
 on:
-  push:
-    branches: [main]
-    tags: ['v*']
-  pull_request:
-    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -55,6 +50,7 @@ jobs:
           path: |
             jediacademy-master/run/releasei386/linuxjampded
             jediacademy-master/run/releasei386/baseq3/jampgamei386.so
+          retention-days: 3
 
   release:
     needs: build
